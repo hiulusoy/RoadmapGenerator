@@ -1,0 +1,566 @@
+<div class="content-wrapper">
+  <div class="flex items-center justify-between">
+    <h3 class="text-lg font-medium">Business Overview</h3>
+    <div aria-label="Breadcrumbs" class="breadcrumbs hidden p-0 text-sm sm:inline">
+      <ul>
+        <li>Nexus</li>
+        <li>Dashboards</li>
+        <li>Ecommerce</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-6">
+    <!--  Başlangıç: Dashboard Sayaç Widget'ı -->
+
+    <div class="grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
+      <!-- Kart 1 -->
+      <div aria-label="Card" class="card bg-base-100 shadow">
+        <div class="card-body gap-2">
+          <div class="flex items-start justify-between gap-2 text-sm">
+            <div>
+              <p class="font-medium text-base-content/70">Revenue</p>
+              <div class="mt-4 flex items-center gap-2">
+                <h5 class="inline text-2xl/none font-semibold">$587.54</h5>
+                <div aria-label="Badge"
+                  class="badge badge-sm gap-1 border-0 bg-success/10 py-3 text-xs font-semibold text-success">
+                  <iconify-icon height="14" icon="lucide:arrow-up"></iconify-icon>
+                  10.8%
+                </div>
+              </div>
+            </div>
+            <div class="rounded bg-base-200 p-2">
+              <iconify-icon class="text-base-content/80" height="20" icon="lucide:circle-dollar-sign"></iconify-icon>
+            </div>
+          </div>
+          <p class="text-sm font-medium">
+            <span class="text-success">+$112.58</span>
+            <span class="ms-1.5 text-base-content/60">than past week</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Kart 2 -->
+      <div aria-label="Card" class="card bg-base-100 shadow">
+        <div class="card-body gap-2">
+          <div class="flex items-start justify-between gap-2 text-sm">
+            <div>
+              <p class="font-medium text-base-content/70">Sales</p>
+              <div class="mt-4 flex items-center gap-2">
+                <h5 class="inline text-2xl/none font-semibold">4500</h5>
+                <div aria-label="Badge"
+                  class="badge badge-sm gap-1 border-0 bg-success/10 py-3 text-xs font-semibold text-success">
+                  <iconify-icon height="14" icon="lucide:arrow-up"></iconify-icon>
+                  21.2%
+                </div>
+              </div>
+            </div>
+            <div class="rounded bg-base-200 p-2">
+              <iconify-icon class="text-base-content/80" height="20" icon="lucide:package"></iconify-icon>
+            </div>
+          </div>
+          <p class="text-sm font-medium">
+            <span class="text-success">+25</span>
+            <span class="ms-1.5 text-base-content/60">than past week</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Kart 3 -->
+      <div aria-label="Card" class="card bg-base-100 shadow">
+        <div class="card-body gap-2">
+          <div class="flex items-start justify-between gap-2 text-sm">
+            <div>
+              <p class="font-medium text-base-content/70">Customer</p>
+              <div class="mt-4 flex items-center gap-2">
+                <h5 class="inline text-2xl/none font-semibold">2200</h5>
+                <div aria-label="Badge"
+                  class="badge badge-sm gap-1 border-0 bg-error/10 py-3 text-xs font-semibold text-error">
+                  <iconify-icon height="14" icon="lucide:arrow-down"></iconify-icon>
+                  10.2%
+                </div>
+              </div>
+            </div>
+            <div class="rounded bg-base-200 p-2">
+              <iconify-icon class="text-base-content/80" height="20" icon="lucide:users"></iconify-icon>
+            </div>
+          </div>
+          <p class="text-sm font-medium">
+            <span class="text-error">-312</span>
+            <span class="ms-1.5 text-base-content/60">than past week</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Kart 4 -->
+      <div aria-label="Card" class="card bg-base-100 shadow">
+        <div class="card-body gap-2">
+          <div class="flex items-start justify-between gap-2 text-sm">
+            <div>
+              <p class="font-medium text-base-content/70">Spending</p>
+              <div class="mt-4 flex items-center gap-2">
+                <h5 class="inline text-2xl/none font-semibold">$112.54</h5>
+                <div aria-label="Badge"
+                  class="badge badge-sm gap-1 border-0 bg-success/10 py-3 text-xs font-semibold text-success">
+                  <iconify-icon height="14" icon="lucide:arrow-up"></iconify-icon>
+                  8.5%
+                </div>
+              </div>
+            </div>
+            <div class="rounded bg-base-200 p-2">
+              <iconify-icon class="text-base-content/80" height="20" icon="lucide:eraser"></iconify-icon>
+            </div>
+          </div>
+          <p class="text-sm font-medium">
+            <span class="text-success">+$54.65</span>
+            <span class="ms-1.5 text-base-content/60">than past week</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--  Bitiş: Dashboard Sayaç Widget'ı -->
+
+    <!-- Ek İçerik Bölümleri -->
+    <!-- Gelir İstatistikleri -->
+    <div class="mt-6 grid gap-6 xl:grid-cols-12">
+      <div class="xl:col-span-7">
+        <!--  Başlangıç: Gelir İstatistiği -->
+
+        <div aria-label="Card" class="card card-bordered bg-base-100">
+          <div class="card-body px-0 pb-0">
+            <div class="px-6">
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Revenue Statistics</span>
+                <div class="tabs-boxed tabs tabs-sm" id="revenue_statistics_options" role="tablist">
+                  <input aria-label="Day" class="tab checked:!rounded-b-btn" name="revenue_statistics_option" role="tab"
+                    type="radio" value="day" />
+                  <input aria-label="Month" class="tab checked:!rounded-b-btn" name="revenue_statistics_option"
+                    role="tab" type="radio" value="month" />
+                  <input aria-label="Year" checked class="tab checked:!rounded-b-btn" name="revenue_statistics_option"
+                    role="tab" type="radio" value="year" />
+                </div>
+              </div>
+              <div class="mt-2 flex items-center gap-3">
+                <span class="text-4xl/none font-semibold" id="total_income">
+                  $12,547K
+                </span>
+                <span class="text-sm font-medium text-success" id="total_income_growth_percentage">
+                  +3.24%
+                </span>
+              </div>
+              <span class="text-sm text-base-content/70" id="total_income_duration_text">
+                Total income in this year
+              </span>
+            </div>
+            <div class="overflow-hidden rounded-xl">
+              <!-- Gelir İstatistiği Grafiği -->
+              <div id="revenue_statistics_chart">
+                <apx-chart [chart]="revenueChartOptions.chart" [colors]="revenueChartOptions.colors"
+                  [dataLabels]="revenueChartOptions.dataLabels" [legend]="revenueChartOptions.legend"
+                  [plotOptions]="revenueChartOptions.plotOptions" [series]="revenueChartOptions.series"
+                  [xaxis]="revenueChartOptions.xaxis"></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--  Bitiş: Gelir İstatistiği -->
+      </div>
+      <!-- Müşteri Kazanımı -->
+      <div class="xl:col-span-5">
+        <!--  Başlangıç: Müşteri Kazanımı -->
+
+        <div aria-label="Card" class="card card-bordered bg-base-100">
+          <div class="card-body p-0">
+            <div class="flex items-center justify-between px-5 pt-4">
+              <span class="font-medium">Customer Acquisition</span>
+            </div>
+            <div class="mt-2 border-y border-base-content/10 py-2">
+              <div class="grid grid-cols-3 gap-5 divide-x divide-base-content/10">
+                <!-- Kullanıcılar -->
+                <div class="text-center">
+                  <p class="text-base font-medium">Users</p>
+                  <p class="mt-1 text-2xl font-semibold">427</p>
+                  <div class="mt-1 inline-flex items-center gap-1 text-success">
+                    <iconify-icon height="16" icon="lucide:arrow-up"></iconify-icon>
+                    <p class="text-sm">3.15%</p>
+                  </div>
+                </div>
+                <!-- Oturumlar -->
+                <div class="text-center">
+                  <p class="text-base font-medium">Sessions</p>
+                  <p class="mt-1 text-2xl font-semibold">34</p>
+                  <div class="mt-1 inline-flex items-center gap-1 text-error">
+                    <iconify-icon height="16" icon="lucide:arrow-down"></iconify-icon>
+                    <p class="text-sm">-2.78%</p>
+                  </div>
+                </div>
+                <!-- Hemen Çıkma Oranı -->
+                <div class="text-center">
+                  <p class="text-base font-medium">Bounce Rate</p>
+                  <p class="mt-1 text-2xl font-semibold">40.5%</p>
+                  <div class="mt-1 inline-flex items-center gap-1 text-success">
+                    <iconify-icon height="16" icon="lucide:arrow-up"></iconify-icon>
+                    <p class="text-sm">5.14%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="overflow-hidden rounded-lg">
+                <div id="customer_acquisition_chart">
+                  <apx-chart [chart]="customerChartOptions.chart" [colors]="customerChartOptions.colors"
+                    [dataLabels]="customerChartOptions.dataLabels" [fill]="customerChartOptions.fill"
+                    [series]="customerChartOptions.series" [stroke]="customerChartOptions.stroke"></apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--  Bitiş: Müşteri Kazanımı -->
+      </div>
+    </div>
+
+    <!-- Ek Bölümler (Son Siparişler, En İyi Ülkeler, Hızlı Sohbet) -->
+    <div class="mt-6 grid gap-6 xl:grid-cols-5 2xl:grid-cols-12">
+      <!-- Son Siparişler -->
+      <div class="hidden sm:block xl:col-span-3 2xl:col-span-5">
+        <!--  Başlangıç: Son Siparişler -->
+
+        <div aria-label="Card" class="card card-bordered bg-base-100">
+          <div class="card-body">
+            <div class="flex items-center justify-between">
+              <span class="font-medium">Recent Orders</span>
+              <button class="btn btn-ghost btn-sm gap-2 bg-base-content/5">
+                <iconify-icon height="16" icon="lucide:download"></iconify-icon>
+                Report
+              </button>
+            </div>
+            <div class="overflow-auto">
+              <table class="table rounded-box" data-component="table" id="recent_orders_table">
+                <thead>
+                  <tr>
+                    <th>
+                      <input aria-label="checked-all-order" class="checkbox checkbox-xs" data-slot="all-checkbox"
+                        id="recent_orders_check_all" type="checkbox" />
+                    </th>
+                    <th>
+                      <span class="text-sm font-medium text-base-content/80">
+                        Product
+                      </span>
+                    </th>
+                    <th>
+                      <span class="text-sm font-medium text-base-content/80">
+                        Price
+                      </span>
+                    </th>
+                    <th>
+                      <span class="text-sm font-medium text-base-content/80">
+                        Date
+                      </span>
+                    </th>
+                    <th>
+                      <span class="text-sm font-medium text-base-content/80">
+                        Status
+                      </span>
+                    </th>
+                    <th>
+                      <span class="text-sm font-medium text-base-content/80">
+                        Action
+                      </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Sipariş 1 -->
+                  <tr class="cursor-pointer">
+                    <th>
+                      <input aria-label="checked-order" class="checkbox checkbox-xs" data-slot="single-checkbox"
+                        id="checked-order-1" type="checkbox" />
+                    </th>
+                    <td>
+                      <div class="flex items-center space-x-3 truncate">
+                        <img alt="order image" class="mask mask-squircle size-8 bg-base-content/10" height="32"
+                          loading="lazy" src="assets/images/apps/ecommerce/products/1.jpg" width="32" />
+                        <p class="line-clamp-2 font-medium">Men's tracking shoes</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <div class="font-medium">$99</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-nowrap text-xs">25 Jun 2024</div>
+                    </td>
+                    <td>
+                      <div>
+                        <div
+                          class="inline rounded-badge border border-success/50 bg-success/5 px-3 py-1 text-xs font-medium text-success">
+                          Delivered
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center">
+                        <button aria-label="Show product" class="btn btn-square btn-ghost btn-sm">
+                          <iconify-icon class="text-base-content/70" height="20" icon="lucide:eye"></iconify-icon>
+                        </button>
+                        <button aria-label="Delete product"
+                          class="btn btn-square btn-ghost btn-sm text-error/70 hover:bg-error/20">
+                          <iconify-icon height="20" icon="lucide:trash"></iconify-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Sipariş 2 -->
+                  <tr class="cursor-pointer">
+                    <th>
+                      <input aria-label="checked-order" class="checkbox checkbox-xs" data-slot="single-checkbox"
+                        id="checked-order-2" type="checkbox" />
+                    </th>
+                    <td>
+                      <div class="flex items-center space-x-3 truncate">
+                        <img alt="order image" class="mask mask-squircle size-8 bg-base-content/10" height="32"
+                          loading="lazy" src="assets/images/apps/ecommerce/products/2.jpg" width="32" />
+                        <p class="line-clamp-2 font-medium">Cocooil body oil</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <div class="font-medium">$99</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-nowrap text-xs">22 Jun 2024</div>
+                    </td>
+                    <td>
+                      <div>
+                        <div
+                          class="inline rounded-badge border border-info/50 bg-info/5 px-3 py-1 text-xs font-medium text-info">
+                          On Going
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center">
+                        <button aria-label="Show product" class="btn btn-square btn-ghost btn-sm">
+                          <iconify-icon class="text-base-content/70" height="20" icon="lucide:eye"></iconify-icon>
+                        </button>
+                        <button aria-label="Delete product"
+                          class="btn btn-square btn-ghost btn-sm text-error/70 hover:bg-error/20">
+                          <iconify-icon height="20" icon="lucide:trash"></iconify-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Sipariş 3 -->
+                  <tr class="cursor-pointer">
+                    <th>
+                      <input aria-label="checked-order" class="checkbox checkbox-xs" data-slot="single-checkbox"
+                        id="checked-order-3" type="checkbox" />
+                    </th>
+                    <td>
+                      <div class="flex items-center space-x-3 truncate">
+                        <img alt="order image" class="mask mask-squircle size-8 bg-base-content/10" height="32"
+                          loading="lazy" src="assets/images/apps/ecommerce/products/3.jpg" width="32" />
+                        <p class="line-clamp-2 font-medium">Freeze air</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <div class="font-medium">$99</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-nowrap text-xs">17 Jun 2024</div>
+                    </td>
+                    <td>
+                      <div>
+                        <div
+                          class="inline rounded-badge border border-success/50 bg-success/5 px-3 py-1 text-xs font-medium text-success">
+                          Delivered
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center">
+                        <button aria-label="Show product" class="btn btn-square btn-ghost btn-sm">
+                          <iconify-icon class="text-base-content/70" height="20" icon="lucide:eye"></iconify-icon>
+                        </button>
+                        <button aria-label="Delete product"
+                          class="btn btn-square btn-ghost btn-sm text-error/70 hover:bg-error/20">
+                          <iconify-icon height="20" icon="lucide:trash"></iconify-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Sipariş 4 -->
+                  <tr class="cursor-pointer">
+                    <th>
+                      <input aria-label="checked-order" class="checkbox checkbox-xs" data-slot="single-checkbox"
+                        id="checked-order-4" type="checkbox" />
+                    </th>
+                    <td>
+                      <div class="flex items-center space-x-3 truncate">
+                        <img alt="order image" class="mask mask-squircle size-8 bg-base-content/10" height="32"
+                          loading="lazy" src="assets/images/apps/ecommerce/products/4.jpg" width="32" />
+                        <p class="line-clamp-2 font-medium">Ladies's shoes</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <div class="font-medium">$99</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-nowrap text-xs">23 Jun 2024</div>
+                    </td>
+                    <td>
+                      <div>
+                        <div
+                          class="inline rounded-badge border border-error/50 bg-error/5 px-3 py-1 text-xs font-medium text-error">
+                          Cancelled
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center">
+                        <button aria-label="Show product" class="btn btn-square btn-ghost btn-sm">
+                          <iconify-icon class="text-base-content/70" height="20" icon="lucide:eye"></iconify-icon>
+                        </button>
+                        <button aria-label="Delete product"
+                          class="btn btn-square btn-ghost btn-sm text-error/70 hover:bg-error/20">
+                          <iconify-icon height="20" icon="lucide:trash"></iconify-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!--  Bitiş: Son Siparişler -->
+      </div>
+
+      <!-- En İyi Ülkeler -->
+      <div class="xl:order-3 xl:col-span-3 2xl:col-span-4">
+        <div aria-label="Card" class="card card-bordered bg-base-100">
+          <div class="card-body gap-0 p-0">
+            <div class="flex items-center gap-3 px-5 pt-5">
+              <span class="iconify text-base-content/80" data-height="16" data-icon="lucide:globe-2"></span>
+              <span class="grow font-medium">Top Countries (% in Sales)</span>
+              <button class="btn btn-ghost btn-sm gap-2 bg-base-content/5">
+                <span class="iconify" data-height="16" data-icon="lucide:eye"></span>
+                Overview
+              </button>
+            </div>
+            <div class="mb-3 me-5">
+              <!-- En İyi Ülkeler Grafiği -->
+              <div id="top_countries_chart">
+                <apx-chart [chart]="topCountriesChartOptions.chart" [colors]="topCountriesChartOptions.colors"
+                  [dataLabels]="topCountriesChartOptions.dataLabels" [legend]="topCountriesChartOptions.legend"
+                  [plotOptions]="topCountriesChartOptions.plotOptions" [series]="topCountriesChartOptions.series"
+                  [xaxis]="topCountriesChartOptions.xaxis"></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hızlı Sohbet -->
+      <div class="xl:order-2 xl:col-span-2 2xl:col-span-3">
+        <!--  Başlangıç: Hızlı Sohbet -->
+
+        <div aria-label="Card" class="card card-bordered bg-base-100">
+          <div class="card-body">
+            <div class="flex items-center gap-3">
+              <iconify-icon class="text-base-content/80" height="16" icon="lucide:messages-square"></iconify-icon>
+
+              <span class="font-medium">Quick Chat</span>
+            </div>
+            <div class="mt-2">
+              <!-- Sohbet 1 -->
+              <div
+                class="flex cursor-pointer gap-4 rounded-box bg-transparent p-2.5 transition-all hover:bg-base-content/10 active:scale-[.98] active:bg-base-content/15">
+                <img alt="chat image" class="mask mask-squircle size-10 bg-base-content/10 p-0.5" height="40"
+                  loading="lazy" src="assets/images/avatars/1.png" width="40" />
+                <div class="grow">
+                  <div class="flex">
+                    <p class="grow font-medium">Mia Johnson</p>
+                    <span class="text-xs text-base-content/60">09:49 PM</span>
+                  </div>
+                  <p class="line-clamp-1 text-ellipsis text-sm/none text-base-content/80">
+                    It's called 'Dreamscape.' A must-watch!
+                  </p>
+                </div>
+              </div>
+
+              <!-- Sohbet 2 -->
+              <div
+                class="flex cursor-pointer gap-4 rounded-box bg-transparent p-2.5 transition-all hover:bg-base-content/10 active:scale-[.98] active:bg-base-content/15">
+                <img alt="chat image" class="mask mask-squircle size-10 bg-base-content/10 p-0.5" height="40"
+                  loading="lazy" src="assets/images/avatars/2.png" width="40" />
+                <div class="grow">
+                  <div class="flex">
+                    <p class="grow font-medium">Ethan Patel</p>
+                    <span class="text-xs text-base-content/60">08:09 PM</span>
+                  </div>
+                  <p class="line-clamp-1 text-ellipsis text-sm/none text-base-content/80">
+                    Just got a new book. Excited to start reading.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Sohbet 3 -->
+              <div
+                class="flex cursor-pointer gap-4 rounded-box bg-transparent p-2.5 transition-all hover:bg-base-content/10 active:scale-[.98] active:bg-base-content/15">
+                <img alt="chat image" class="mask mask-squircle size-10 bg-base-content/10 p-0.5" height="40"
+                  loading="lazy" src="assets/images/avatars/3.png" width="40" />
+                <div class="grow">
+                  <div class="flex">
+                    <p class="grow font-medium">Sophia Nguyen</p>
+                    <span class="text-xs text-base-content/60">06:29 PM</span>
+                  </div>
+                  <p class="line-clamp-1 text-ellipsis text-sm/none text-base-content/80">
+                    How's your day going?
+                  </p>
+                </div>
+              </div>
+
+              <!-- Sohbet 4 -->
+              <div
+                class="flex cursor-pointer gap-4 rounded-box bg-transparent p-2.5 transition-all hover:bg-base-content/10 active:scale-[.98] active:bg-base-content/15">
+                <img alt="chat image" class="mask mask-squircle size-10 bg-base-content/10 p-0.5" height="40"
+                  loading="lazy" src="assets/images/avatars/4.png" width="40" />
+                <div class="grow">
+                  <div class="flex">
+                    <p class="grow font-medium">Emily Chen</p>
+                    <span class="text-xs text-base-content/60">04:49 PM</span>
+                  </div>
+                  <p class="line-clamp-1 text-ellipsis text-sm/none text-base-content/80">
+                    Did you see that amazing sunset yesterday?
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2 text-center">
+              <a href="./apps-chat.html">
+                <button class="btn btn-ghost btn-outline btn-sm">Go To Chat</button>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!--  Bitiş: Hızlı Sohbet -->
+      </div>
+    </div>
+  </div>
+
+</div>

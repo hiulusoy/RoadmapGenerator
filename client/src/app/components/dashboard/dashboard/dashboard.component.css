@@ -1,0 +1,32 @@
+.content-wrapper {
+  padding: 24px;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-widgets {
+  display: grid;
+  gap: 20px;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
