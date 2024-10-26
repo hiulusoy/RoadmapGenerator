@@ -12,6 +12,10 @@ import { FooterComponent } from "./layout/layout/footer/footer.component";
 import { RouterModule } from "@angular/router";
 import { DashboardComponent } from "./components/dashboard/dashboard/dashboard.component";
 import { ChartComponent } from "ng-apexcharts";
+import { AuthLayoutComponent } from './modules/layouts/auth/auth-layout.component';
+import { AuthService } from './modules/authentication-module/services/auth.service';
+import { LoadingService } from '../shared/services/loading.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,15 +24,20 @@ import { ChartComponent } from "ng-apexcharts";
     SidebarComponent,
     TopbarComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    AuthLayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    ChartComponent
+    ChartComponent,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    AuthService, 
+    LoadingService
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
