@@ -8,7 +8,7 @@ declare let FilePondPluginImagePreview: any;
 @Injectable({
   providedIn: 'root'
 })
-export class LayoutService {
+export class AdminLayoutService {
   private renderer: Renderer2;
   private config: any;
   private defaultConfig: any;
