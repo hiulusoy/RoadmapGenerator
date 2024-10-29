@@ -5,27 +5,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import 'iconify-icon';
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
-import { LayoutComponent } from "./layout/layout/layout.component";
-import { SidebarComponent } from "./layout/layout/sidebar/sidebar.component";
-import { TopbarComponent } from "./layout/layout/topbar/topbar.component";
-import { FooterComponent } from "./layout/layout/footer/footer.component";
+import { SidebarComponent } from "./layouts/admin/sidebar/sidebar.component";
+import { TopbarComponent } from "./layouts/admin/topbar/topbar.component";
+import { FooterComponent } from "./layouts/admin/footer/footer.component";
 import { RouterModule } from "@angular/router";
 import { DashboardComponent } from "./components/dashboard/dashboard/dashboard.component";
 import { ChartComponent } from "ng-apexcharts";
-import { AuthLayoutComponent } from './modules/layouts/auth/auth-layout.component';
+import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AuthService } from './modules/authentication-module/services/auth.service';
 import { LoadingService } from '../shared/services/loading.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserLayoutComponent } from './layouts/user/user-layout/user-layout.component';
+import { AdminLayoutComponent } from './layouts/admin/admin-layout/admin-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent,
+    AdminLayoutComponent,
     SidebarComponent,
     TopbarComponent,
     FooterComponent,
     DashboardComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    UserLayoutComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,
