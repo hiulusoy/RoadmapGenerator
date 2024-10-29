@@ -8,4 +8,5 @@ export const environment = {
     ROUTE_LOGIN: 'login',
     ROUTE_REGISTER: 'register',
     ROUTE_FORGOT_PASSWORD: 'forgot-password',
+    ROUTE_LANDING: 'landing',
 };
