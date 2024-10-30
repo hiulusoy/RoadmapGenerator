@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout/admin-layout.component';
 import { UserLayoutComponent } from './layouts/user/user-layout/user-layout.component';
 import { LandingComponent } from './modules/landing-module/landing.component';
+import { RoadmapGeneratorComponent } from './modules/roadmap-generator-module/roadmap-generator.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,16 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./modules/landing-module/landing.module').then(m => m.LandingModule)
+      }
+    ]
+  },
+  {
+    path: environment.ROUTE_ROUTEMAP_GENERATOR,
+    component: RoadmapGeneratorComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./modules/roadmap-generator-module/roadmap-generator.module').then(m => m.RoadmapGeneratorModule)
       }
     ]
   },

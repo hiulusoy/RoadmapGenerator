@@ -9,4 +9,5 @@ export const environment = {
     ROUTE_REGISTER: 'register',
     ROUTE_FORGOT_PASSWORD: 'forgot-password',
     ROUTE_LANDING: 'landing',
+    ROUTE_ROUTEMAP_GENERATOR: 'roadmap-generator'
 };

@@ -17,6 +17,8 @@ import { LoadingService } from '../shared/services/loading.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserLayoutComponent } from './layouts/user/user-layout/user-layout.component';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout/admin-layout.component';
+import { RoadmapGeneratorComponent } from './modules/roadmap-generator-module/roadmap-generator.component';
+import { RoadmapGeneratorModule } from './modules/roadmap-generator-module/roadmap-generator.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,7 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout/admin-layout.
     AppRoutingModule,
     RouterModule,
     ChartComponent,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     AuthService, 
