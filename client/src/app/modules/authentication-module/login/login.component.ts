@@ -10,18 +10,18 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  @ViewChild('bannerVideo') videoPlayer?: ElementRef;
+  // @ViewChild('bannerVideo') videoPlayer?: ElementRef;
 
-  playVideo() {
-    const video: HTMLVideoElement = this.videoPlayer?.nativeElement;
-    video.play();
+  // playVideo() {
+  //   const video: HTMLVideoElement = this.videoPlayer?.nativeElement;
+  //   video.play();
   
-  }
+  // }
 
-  pauseVideo() {
-    const video: HTMLVideoElement = this.videoPlayer?.nativeElement;
-    video.pause();
-  }
+  // pauseVideo() {
+  //   const video: HTMLVideoElement = this.videoPlayer?.nativeElement;
+  //   video.pause();
+  // }
 
 
   registerRoute: string = `/${environment.ROUTE_PARENT_AUTHENTICATION}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_REGISTER}`;
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(public formBuilder: FormBuilder, private loadingService: LoadingService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.playVideo();
+    // this.playVideo();
     this.loginForm = this.formBuilder.group({
       email: [''],
       password: [''],
@@ -61,6 +61,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.hide = !this.hide;
   }
   ngOnDestroy(): void {
-    this.pauseVideo();
+    // this.pauseVideo();
   }
 }
