@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RoadmapGeneratorRoutes } from './roadmap-generator.routing';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { RoadmapGeneratorComponent } from './roadmap-generator.component';
-
 
 
 @NgModule({

@@ -17,9 +17,7 @@ import { LoadingService } from '../shared/services/loading.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserLayoutComponent } from './layouts/user/user-layout/user-layout.component';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout/admin-layout.component';
-import { RoadmapGeneratorComponent } from './modules/roadmap-generator-module/roadmap-generator.component';
-import { RoadmapGeneratorModule } from './modules/roadmap-generator-module/roadmap-generator.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +31,8 @@ import { RoadmapGeneratorModule } from './modules/roadmap-generator-module/roadm
     AdminLayoutComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,    
+    BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
     ChartComponent,

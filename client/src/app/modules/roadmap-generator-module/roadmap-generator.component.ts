@@ -1,18 +1,30 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-roadmap-generator',
   templateUrl: './roadmap-generator.component.html',
-  styleUrl: './roadmap-generator.component.css'
+  styleUrl: './roadmap-generator.component.css',
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('800ms cubic-bezier(0.55, 0.085, 0.68, 0.53)', style({ opacity: 1 })),
+      ]),
+      // transition(':leave', [
+      //   animate('500ms ease-out', style({ opacity: 0 })),
+      // ]),
+    ])
+  ]
 })
 export class RoadmapGeneratorComponent implements OnInit {
-  
   learningPlanForm: FormGroup;
   currentStep: number = 1;
   formSubmitted: boolean = false;
-
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.learningPlanForm = this.fb.group({
       topic: ['', Validators.required],

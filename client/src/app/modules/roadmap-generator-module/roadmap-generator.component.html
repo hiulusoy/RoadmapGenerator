@@ -25,11 +25,10 @@
             );
           "></div>
             </div>
-
             <div class="flex justify-center items-center h-screen w-full -my-64" *ngIf="!formSubmitted">
                 <form [formGroup]="learningPlanForm">
                     <!-- Step 1: Topic -->
-                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 1">
+                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 1" @fadeInOut>
                         <label class="text-black text-7xl mt-24 mb-16" for="topic">What would you like to learn?</label>
                         <input class="large-input bg-transparent text-gray-700 py-8 px-3 w-full text-3xl" type="text"
                             formControlName="topic" placeholder="Enter a topic (e.g., Kubernetes)">
@@ -39,7 +38,7 @@
                     </div>
 
                     <!-- Step 2: Level -->
-                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 2">
+                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 2" @fadeInOut>
                         <label class="text-black text-7xl mt-24 mb-16" for="level">What is your proficiency at this
                             topic?</label>
                         <select formControlName="level"
@@ -55,7 +54,7 @@
                             (click)="nextStep()">Next</button>
                     </div>
                     <!-- Step 3: Learning Style -->
-                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 3">
+                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 3" @fadeInOut>
                         <label class="text-black text-7xl mt-24 mb-16" for="learningStyle">How would you like to
                             learn?</label>
                         <select formControlName="learningStyle"
@@ -73,7 +72,7 @@
 
                     <!-- Step 4: Time Frame -->
 
-                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 4">
+                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 4" @fadeInOut>
                         <label class="text-black text-7xl mt-24 mb-16" for="timeFrame">How much time you can
                             spare?</label>
                         <input class="large-input bg-transparent text-gray-700 py-8 px-3 w-full text-3xl" type="text"
@@ -85,7 +84,7 @@
 
                     <!-- Step 5: Schedule Type -->
 
-                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 5">
+                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 5" @fadeInOut>
                         <label class="text-black text-7xl mt-24 mb-16" for="scheduleType">How often would you like to
                             study?</label>
                         <select formControlName="scheduleType"
@@ -100,7 +99,7 @@
                             (click)="nextStep()">Next</button>
                     </div>
 
-                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 6">
+                    <div class="flex h-48 flex-col justify-around items-start" *ngIf="currentStep === 6" @fadeInOut>
                         <label class="text-black text-7xl mt-24 mb-16 text-center" for="scheduleType">Submit your selected information to generate roadmap...</label>
                         <button
                             class="bg-white text-xl mt-10 hover:bg-indigo-50 text-gray-800 font-semibold py-4 px-24 border border-gray-400 rounded shadow self-center"
