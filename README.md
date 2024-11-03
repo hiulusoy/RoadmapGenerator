@@ -1,8 +1,7 @@
 # RoadmapGenerator
 
-**Version:** 1.1.23  
-**Author:** memoryLeak.io  
-**License:** COMMERCIAL
+**Version:** 0.0.1 
+**Author:** hiulusoy
 
 ## Table of Contents
 
