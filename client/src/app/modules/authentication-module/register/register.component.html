@@ -1,27 +1,26 @@
-<div class="grid min-h-screen grid-cols-12 overflow-auto">
+<div class="grid h-screen grid-cols-12">
   <!--  Start: Register Side Image Panel -->
-
   <div class="relative hidden bg-white lg:col-span-7 lg:block xl:col-span-8 2xl:col-span-9">
     <div class="absolute inset-0 flex items-center justify-center">
-      <img alt="Register Image" loading="lazy" class="object-cover w-3/4"
-        src="../../../../assets/images/auth/signup.jpg" />
+      <img
+        alt="Register Image"
+        loading="lazy"
+        class="object-cover w-3/4 max-h-full"
+        src="../../../../assets/images/auth/signup.jpg"
+      />
     </div>
   </div>
-
   <!--  End: Register Side Image Panel -->
 
-  <div class="col-span-12 lg:col-span-5 xl:col-span-4 2xl:col-span-3">
-    <div class="flex flex-col items-stretch p-8 lg:p-16">
-      <h3 class="mt-8 text-center text-xl font-semibold md:mt-12 lg:mt-24">
-        Register
-      </h3>
+  <div class="col-span-12 lg:col-span-5 xl:col-span-4 2xl:col-span-3 overflow-y-auto">
+    <div class="flex flex-col items-stretch p-4 md:p-6 lg:p-8">
+      <h3 class="mt-8 text-center text-xl font-semibold md:mt-12 lg:mt-24">Register</h3>
       <h3 class="mt-2 text-center text-sm text-base-content/70">
-        Seamless Access, Secure Connection: Your Gateway to a Personalized
-        Experience.
+        Seamless Access, Secure Connection: Your Gateway to a Personalized Experience.
       </h3>
       <div class="mt-6 md:mt-10">
         <!--  Start: Register Form -->
-        <form [formGroup]="registerForm">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
           <div>
             <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
               <div class="form-control">
@@ -30,9 +29,13 @@
                 </label>
                 <div class="form-control flex flex-row items-center rounded-box border border-base-content/20 ps-3">
                   <iconify-icon icon="lucide:user" height="18" class="text-base-content/80"></iconify-icon>
-                  <input id="firstName" placeholder="First Name" formControlName="firstName"
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    placeholder="First Name"
+                    formControlName="firstName"
                     class="input input-sm w-full transition-all focus:border-transparent focus:outline-0 focus:outline-offset-0"
-                    name="firstName" />
+                  />
                 </div>
               </div>
               <div class="form-control">
@@ -41,9 +44,13 @@
                 </label>
                 <div class="form-control flex flex-row items-center rounded-box border border-base-content/20 ps-3">
                   <iconify-icon icon="lucide:user" height="18" class="text-base-content/80"></iconify-icon>
-                  <input id="lastName" placeholder="Last Name" formControlName="lastName"
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Last Name"
+                    formControlName="lastName"
                     class="input input-sm w-full transition-all focus:border-transparent focus:outline-0 focus:outline-offset-0"
-                    name="lastName" />
+                  />
                 </div>
               </div>
             </div>
@@ -53,58 +60,86 @@
               </label>
               <div class="form-control flex flex-row items-center rounded-box border border-base-content/20 ps-3">
                 <iconify-icon icon="lucide:mail" height="18" class="text-base-content/80"></iconify-icon>
-                <input id="email" placeholder="Email Address" formControlName="email"
+                <input
+                  id="email"
+                  name="email"
+                  placeholder="Email Address"
+                  formControlName="email"
                   class="input input-sm w-full transition-all focus:border-transparent focus:outline-0 focus:outline-offset-0"
-                  name="email" />
+                />
               </div>
             </div>
             <div class="form-control mt-3">
-              <label class="label" for="password"><span class="label-text">Password</span></label>
-              <div class="form-control flex flex-row items-center rounded-box border border-base-content/20 pe-3 ps-3"
-                data-component="password-field">
+              <label class="label" for="password">
+                <span class="label-text">Password</span>
+              </label>
+              <div
+                class="form-control flex flex-row items-center rounded-box border border-base-content/20 pe-3 ps-3"
+                data-component="password-field"
+              >
                 <iconify-icon icon="lucide:key-round" height="18" class="text-base-content/80"></iconify-icon>
-                <input id="password" placeholder="Password" formControlName="password"
+                <input
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  formControlName="password"
+                  [type]="hide ? 'password' : 'text'"
                   class="input input-sm w-full transition-all focus:border-transparent focus:outline-0 focus:outline-offset-0"
-                  [type]="hide ? 'password' : 'text'" data-slot="input" name="password" />
-                <button id="toggle_password_field_type" (click)="toggleHide()" type="button" data-slot-value="hide"
-                  data-slot="visibility-toggle" aria-label="Show/Hide password"
-                  class="group btn btn-circle btn-ghost btn-xs hover:bg-base-content/10">
-                  <iconify-icon [icon]="hide ? 'lucide:eye' : 'lucide:eye-off'" height="16"
-                    class="inline text-base-content/80"></iconify-icon>
+                />
+                <button
+                  id="toggle_password_field_type"
+                  type="button"
+                  (click)="toggleHide()"
+                  aria-label="Show/Hide password"
+                  class="group btn btn-circle btn-ghost btn-xs hover:bg-base-content/10"
+                >
+                  <iconify-icon [icon]="hide ? 'lucide:eye' : 'lucide:eye-off'" height="16" class="inline text-base-content/80"></iconify-icon>
                 </button>
               </div>
             </div>
             <div class="mt-4 flex items-center gap-3 md:mt-6">
-              <input id="agreement" class="checkbox-primary checkbox checkbox-xs" type="checkbox" name="agreement" formControlName="termsAndCondition" />
+              <input
+                id="agreement"
+                name="agreement"
+                type="checkbox"
+                formControlName="termsAndCondition"
+                class="checkbox-primary checkbox checkbox-xs"
+              />
               <label for="agreement">
                 I agree with
                 <span class="cursor-pointer text-primary underline">terms and conditions</span>
               </label>
             </div>
+            <!-- Register Button -->
+            <div class="mt-4 md:mt-6">
+              <button type="submit" class="btn btn-primary btn-block gap-2 text-base">
+                <iconify-icon icon="lucide:user-plus" height="16"></iconify-icon>
+                Register
+              </button>
+            </div>
           </div>
         </form>
         <!--  End: Register Form -->
 
-        <div class="mt-4 md:mt-6">
-          <a class="btn btn-primary btn-block gap-2 text-base" (click)="register()">
-            <iconify-icon icon="lucide:user-plus" height="16"></iconify-icon>
-            Register
-          </a>
-        </div>
         <div class="mt-4">
           <!--  Start: Social Google Register -->
-
           <button
-            class="btn btn-outline btn-md btn-block flex items-center gap-3 border-base-content/10 !text-base-content hover:border-transparent hover:bg-base-content/10">
-            <img alt="" loading="lazy" width="200" height="200" class="size-6"
-              src="/assets/images/brand-logo/google-mini.svg" />
+            class="btn btn-outline btn-md btn-block flex items-center gap-3 border-base-content/10 !text-base-content hover:border-transparent hover:bg-base-content/10"
+          >
+            <img
+              alt=""
+              loading="lazy"
+              width="200"
+              height="200"
+              class="size-6"
+              src="/assets/images/brand-logo/google-mini.svg"
+            />
             <span class="text-base">Register with Google</span>
           </button>
-
           <!--  End: Social Google Register -->
         </div>
         <p class="mt-4 text-center text-sm text-base-content/80 md:mt-6">
-          I have already to
+          Already have an account?
           <a class="text-primary hover:underline" [routerLink]="[loginRoute]">Login</a>
         </p>
       </div>

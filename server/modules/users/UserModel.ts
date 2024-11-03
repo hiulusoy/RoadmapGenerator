@@ -4,10 +4,10 @@ import mongoose, { Document, Schema, Model } from 'mongoose';
 export interface IUser extends Document {
   firstName: string;
   lastName: string;
-  age: number;
-  profession: string;
-  interests: string[];
-  skills: mongoose.Types.ObjectId[]; // Referans olarak Skill IDs
+  age?: number;
+  profession?: string;
+  interests?: string[];
+  skills?: mongoose.Types.ObjectId[]; // Referans olarak Skill IDs
   currentlyLearning?: string;
   wantsToLearn?: string;
   careerPlan?: string;
@@ -19,8 +19,8 @@ const UserSchema: Schema = new Schema(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    age: { type: Number, min: 0, required: true },
-    profession: { type: String, required: true },
+    age: { type: Number, min: 0, required: false },
+    profession: { type: String, required: false },
     interests: { type: [String], default: [] },
     skills: [
       {

@@ -1,0 +1,147 @@
+<div class="content-wrapper">
+  <div class="flex gap-6 overflow-hidden">
+    <div aria-label="Card" class="card card-bordered bg-base-100 w-3/5">
+      <div class="card-body">
+        <div class="card-title flex items-center justify-between">
+          <span>{{ roadmap?.topic }} RoadMap ({{ getWeekKeys().length }} weeks)</span>
+          <button class="btn btn-primary btn-sm" (click)="completeRoadmap()">Completed</button>
+        </div>
+        <div class="mt-1 space-y-1 overflow-auto">
+          <!-- Start: Default Timeline -->
+
+          <ul *ngIf="getWeekKeys().length > 0" class="timeline timeline-vertical">
+            <li
+              *ngFor="let weekKey of getWeekKeys()"
+              (click)="selectWeek(weekKey)"
+              [ngClass]="{ 'bg-gray-200': selectedWeek === roadmap.weeklySchedule[weekKey] }"
+              class="cursor-pointer hover:bg-gray-300 p-3 rounded-md flex items-center"
+            >
+              <div class="timeline-start font-semibold text-lg w-24 text-left">{{ weekKey }}</div>
+              <div class="timeline-middle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-primary h-5 w-5">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <hr class="bg-primary flex-1" />
+            </li>
+          </ul>
+
+          <!-- End: Default Timeline -->
+        </div>
+      </div>
+    </div>
+    <div aria-label="Card" class="card card-bordered bg-base-100 w-2/5 shrink-0">
+      <div class="card-body">
+        <div *ngIf="selectedWeek" class="card-title text-2xl font-bold">{{ selectedWeek?.activity }}</div>
+        <div class="mt-4 space-y-3 overflow-auto" *ngIf="selectedWeek">
+          <p class="text-lg"><strong>Description:</strong> {{ selectedWeek?.description }}</p>
+          <div *ngIf="selectedWeek?.resources.length > 0">
+            <h4 class="text-xl font-semibold mt-4">Resources:</h4>
+            <ul class="list-disc pl-5">
+              <li *ngFor="let resource of selectedWeek.resources" class="mb-2">
+                <a [href]="resource.link" target="_blank" class="text-blue-600 hover:underline">{{ resource.description }}</a>
+                <span class="text-sm text-gray-700"> - Types: {{ resource.learningType.join(', ') }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div *ngIf="!selectedWeek">
+          <p class="text-lg text-gray-500">Select a week to see details.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Modal -->
+  <dialog id="my_modal_5" class="modal w-4/5 max-w-none h-[85vh] mx-auto my-16 rounded-lg shadow-lg">
+    <div class="modal-box h-full flex flex-col justify-between items-center">
+      <div class="w-full mb-6">
+        <h3 class="text-3xl font-bold mb-4 text-center">Question {{ currentQuestionIndex + 1 }} of {{ quizQuestions.length }}</h3>
+        <p class="text-xl mb-8 text-center">{{ quizQuestions[currentQuestionIndex]?.question }}</p>
+      </div>
+
+      <div class="w-full flex-grow flex flex-col items-center">
+        <ul class="space-y-6 w-full px-10">
+          <li *ngFor="let answer of quizQuestions[currentQuestionIndex]?.options; let i = index" class="mb-2 text-center">
+            <label class="flex items-center justify-center space-x-4 p-3 bg-gray-100 rounded-md hover:bg-gray-200">
+              <input type="radio" name="answer" [value]="answer" [(ngModel)]="selectedAnswer" class="radio radio-primary" />
+              <span class="text-lg">{{ ['A', 'B', 'C', 'D'][i] }}. {{ answer }}</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="modal-action mt-8 flex justify-between items-center w-full px-10">
+        <button class="btn btn-secondary" (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">Previous</button>
+
+        <div class="flex-1 text-center">
+          <span *ngIf="currentQuestionIndex < quizQuestions.length - 1">
+            <button class="btn btn-primary" (click)="nextQuestion()" [disabled]="!selectedAnswer">Next</button>
+          </span>
+          <span *ngIf="currentQuestionIndex === quizQuestions.length - 1">
+            <button class="btn btn-success" (click)="finishQuiz()" [disabled]="!selectedAnswer">Finish Quiz</button>
+          </span>
+        </div>
+
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Quiz Summary Modal -->
+  <dialog id="quiz_summary_modal" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl h-[85vh] mx-auto my-16 rounded-lg shadow-lg">
+      <h3 class="text-3xl font-bold text-center mb-6">Quiz Results</h3>
+
+      <div *ngIf="quizResults && quizResults.answers && quizResults.answers.length > 0; else noResults">
+        <div class="overflow-x-auto">
+          <table class="table w-full text-center">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Question</th>
+                <th>Your Answer</th>
+                <th>Correct Answer</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let answer of quizResults.answers; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ answer.question }}</td>
+                <td>{{ answer.selectedAnswer }}</td>
+                <td>{{ answer.correctAnswer }}</td>
+                <td>
+                  <span [ngClass]="answer.isCorrect ? 'text-green-600' : 'text-red-600'">
+                    {{ answer.isCorrect ? 'Correct' : 'Incorrect' }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="text-center mt-6">
+          <p class="text-lg">Correct Answers: {{ quizResults.correctCount }} / {{ quizResults.answers.length }}</p>
+          <p class="text-lg">Incorrect Answers: {{ quizResults.incorrectCount }} / {{ quizResults.answers.length }}</p>
+        </div>
+      </div>
+
+      <ng-template #noResults>
+        <p class="text-center text-lg">No quiz results available.</p>
+      </ng-template>
+
+      <div class="modal-action justify-center mt-6">
+        <form method="dialog">
+          <button class="btn btn-primary">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+</div>
