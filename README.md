@@ -1,5 +1,7 @@
 # RoadmapGenerator
 
+![CleanShot 2024-11-03 at 23 06 51](https://github.com/user-attachments/assets/45912812-dd23-4c06-8f11-6be1ae71b940)
+
 **Version:** 0.0.1 
 **Author:** hiulusoy
 
