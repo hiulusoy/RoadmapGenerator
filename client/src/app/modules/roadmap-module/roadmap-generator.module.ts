@@ -7,9 +7,10 @@ import { RoadmapGeneratorComponent } from './roadmap-generator/roadmap-generator
 import { RoadmapListComponent } from './roadmap-list/roadmap-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../shared/shared.module';
+import { RoadmapInspectComponent } from './roadmap-inspect/roadmap-inspect.component';
 
 @NgModule({
-  declarations: [RoadmapGeneratorComponent, RoadmapListComponent],
+  declarations: [RoadmapGeneratorComponent, RoadmapListComponent, RoadmapInspectComponent],
   imports: [SharedModule, RouterModule.forChild(RoadmapGeneratorRoutes)],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
