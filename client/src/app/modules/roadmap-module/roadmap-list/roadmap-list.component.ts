@@ -20,10 +20,13 @@ export class RoadmapListComponent {
   getRoadmaps(): void {
     this.roadmapService.getRoadmaps().subscribe(
       (response) => {
-        // Check if the response has data
+        // Yanıtın veri içerip içermediğini kontrol et
         if (response && Array.isArray(response)) {
           this.roadmaps = response.map((roadmap) => {
-            const firstWeek = Object.values(roadmap.weeklySchedule.weeks)[0] || {};
+            // weeklySchedule ve weeks'in tanımlı olup olmadığını kontrol et
+            const weeks = roadmap.weeklySchedule?.weeks;
+            const firstWeek = weeks ? Object.values(weeks)[0] : {};
+
             return {
               _id: roadmap._id,
               isPublic: roadmap.isPublic,
@@ -32,11 +35,11 @@ export class RoadmapListComponent {
               topic: roadmap.topic,
               level: roadmap.level,
               learning_style: roadmap.learning_style,
+              // İsteğe bağlı: İlk hafta bilgilerini de ekleyebilirsiniz
+              firstWeek: firstWeek,
             };
           });
-          console.log('Normalized Roadmap list:', this.roadmaps);
         } else {
-          console.log('No data found in the response');
         }
       },
       (error) => {

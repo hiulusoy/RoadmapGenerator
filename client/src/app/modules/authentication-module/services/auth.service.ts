@@ -6,6 +6,7 @@ import { LoginRequest, RegisterRequest } from '../model/request/request';
 
 @Injectable()
 export class AuthService extends BaseService {
+ 
   constructor(http: HttpClient) {
     super(http);
   }

@@ -45,7 +45,6 @@ export class AuthEffects {
         tap((action: LoginSuccess) => {
           this.loadingService.hide();
           const redirectTo = this.getFirstAccessibleRoute(action.payload.user);
-          console.log(`Yönlendirme rotası: ${redirectTo}`);
           this.router.navigate([redirectTo]);
         })
       ),
@@ -67,17 +66,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActionTypes.LOGOUT),
-        tap(() => {
-          console.log('logged out');
-          // this.authService.signOut().subscribe(
-          //   (response: any) => {
-          //     if (response) {
-          //       this.router.navigate([`${environment.ROUTE_PAGES}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_LOGIN}`]);
-          //     }
-          //   },
-          //   (error) => {}
-          // );
-        })
+        tap(() => {})
       ),
     { dispatch: false }
   );
@@ -85,14 +74,11 @@ export class AuthEffects {
   constructor(private actions$: Actions, private authService: AuthService, private router: Router, private loadingService: LoadingService) {}
 
   private getFirstAccessibleRoute(user: UserModel): string {
-    console.log(user, 'user');
     if (!user || !user.role) return '/';
 
     if (user.role.toLocaleUpperCase() == 'ADMIN') {
-      console.log('Admin');
       return `/${environment.ROUTE_ADMIN}/dashboard`;
     } else if (user.role.toLocaleUpperCase() == 'USER') {
-      console.log('User');
       return `/${environment.ROUTE_ROADMAP}/list`;
     }
 

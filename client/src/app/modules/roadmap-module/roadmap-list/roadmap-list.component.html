@@ -3,11 +3,7 @@
     <div class="flex items-center justify-between">
       <h3 class="text-lg font-medium">Roadmaps</h3>
       <div aria-label="Breadcrumbs" class="breadcrumbs hidden p-0 text-sm sm:inline">
-        <ul>
-          <li>Nexus</li>
-          <li>Ecommerce</li>
-          <li>Roadmaps</li>
-        </ul>
+        <ul></ul>
       </div>
     </div>
     <div class="mt-5">
@@ -89,14 +85,8 @@
                   </td>
                   <td>
                     <div class="inline-flex w-fit">
-                      <button aria-label="Edit roadmap" class="btn btn-square btn-ghost btn-sm" (click)="editRoadmap(roadmap)">
-                        <iconify-icon icon="lucide:pencil" height="15" class="text-base-content/70"></iconify-icon>
-                      </button>
-                      <button aria-label="View roadmap" class="btn btn-square btn-ghost btn-sm" (click)="viewRoadmap(roadmap)">
+                      <button aria-label="View roadmap" class="btn btn-square btn-ghost btn-sm" (click)="editRoadmap(roadmap)">
                         <iconify-icon icon="lucide:eye" height="16" class="text-base-content/70"></iconify-icon>
-                      </button>
-                      <button aria-label="Delete roadmap" class="btn btn-square btn-ghost btn-sm text-error/70 hover:bg-error/20" (click)="confirmDelete(roadmap)">
-                        <iconify-icon icon="lucide:trash" height="16"></iconify-icon>
                       </button>
                     </div>
                   </td>

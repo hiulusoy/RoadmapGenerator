@@ -15,7 +15,6 @@ export class StartupService {
 
   loadInitialState(): void {
     this.checkCurrentUser();
-    this.redirectToLastUrl();
   }
 
   private checkCurrentUser(): void {
@@ -24,12 +23,10 @@ export class StartupService {
       .pipe(take(1))
       .subscribe((user) => {
         if (!user) {
-          this.router.navigate([`${environment.ROUTE_PAGES}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_LOGIN}`]);
+          this.router.navigate([`${environment.ROUTE_LANDING}`]);
         } else {
-          // Burada ek kullanıcı yükleme işlemleri yapılabilir
-          // kullanıcı giriş yapmamış, giriş sayfasına yönlendir
-          this.router.navigate([`${environment.ROUTE_PAGES}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_LOGIN}`]);
-          return false;
+          // Kullanıcı giriş yapmışsa uygun bir ana sayfaya yönlendirme yapın
+          this.router.navigate([`${environment.ROUTE_ROADMAP}`]); // Örneğin admin paneli
         }
       });
   }

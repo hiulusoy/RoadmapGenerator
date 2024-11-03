@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import RoadmapRepository from './RoadmapRepository';
-import RoadmapRequestModel, { IRoadmapRequest } from './RoadmapRequestModel';
+import RoadmapRequestModel, { IRoadmapRequest } from './model/RoadmapRequestModel';
 import axios from 'axios';
-import RoadmapResponseModel, { IRoadmapResponse, IRoadmapResponseData } from './RoadmapResponseModel';
+import RoadmapResponseModel, { IRoadmapResponse, IRoadmapResponseData } from './model/RoadmapResponseModel';
+import RoadmapRepository from './RoadmapRepository';
 
 class RoadmapService {
   async getAll(userId: string): Promise<any[]> {
@@ -57,26 +57,28 @@ class RoadmapService {
     }
   }
 
+  // Roadmap oluşturur veya günceller
   async createOrUpdate(roadmapData: IRoadmapRequest, userId: any): Promise<IRoadmapResponse> {
     try {
-      // Check if a request with the same properties already exists
+
+      // Aynı özelliklere sahip mevcut isteği bul
       const existingRequest = await RoadmapRepository.findRequestByData(roadmapData);
 
       if (existingRequest) {
-        // Add user ID to the array if it's not already present
+        // Kullanıcı ID'sini ekle (eğer zaten yoksa)
         if (!existingRequest.createdByIds.includes(userId)) {
           existingRequest.createdByIds.push(userId);
-          // Save the update
           await existingRequest.save();
         }
 
-        // Optionally, return the existing roadmap if it already has a response
+        // Mevcut yanıtı bul
         const existingResponse = await RoadmapRepository.findResponseByRequestId(existingRequest._id);
 
         if (existingResponse) {
           return existingResponse;
         } else {
-          // If no existing response, generate a new roadmap response using the Flask API
+
+          // Flask API'sine istek gönder
           const flaskResponse = await axios.post('http://localhost:5001/invoke_graph', {
             topic: roadmapData.topic,
             level: roadmapData.level,
@@ -89,23 +91,27 @@ class RoadmapService {
 
           const responseData = flaskResponse.data;
 
+          // Yanıt verisini yapılandır
           const roadmapResponseData: IRoadmapResponseData = {
-            weeklySchedule: responseData.weeklySchedule, // Use response data directly
+            weeklySchedule: responseData.weeklySchedule, // Flask API'den gelen veriyi doğrudan kullan
             isPublic: roadmapData.isShared,
             requestId: existingRequest._id,
             createdByIds: existingRequest.createdByIds,
           };
 
+
+          // Yanıtı kaydet
           const savedResponse = await RoadmapRepository.createResponse(roadmapResponseData);
           return savedResponse;
         }
       } else {
-        // Create a new request and response
+
+        // Yeni istek oluştur
         roadmapData.createdByIds = [userId];
 
         const savedRequest = await RoadmapRepository.createRequest(roadmapData);
 
-        // Generate a new roadmap response using the Flask API
+        // Flask API'sine istek gönder
         const flaskResponse = await axios.post('http://localhost:5001/invoke_graph', {
           topic: roadmapData.topic,
           level: roadmapData.level,
@@ -118,17 +124,21 @@ class RoadmapService {
 
         const responseData = flaskResponse.data;
 
+        // Yanıt verisini yapılandır
         const roadmapResponseData: IRoadmapResponseData = {
-          weeklySchedule: responseData.weeklySchedule, // Use response data directly
+          weeklySchedule: responseData.weeklySchedule, // Flask API'den gelen veriyi doğrudan kullan
           isPublic: roadmapData.isShared,
           requestId: savedRequest._id,
           createdByIds: [userId],
         };
 
+
+        // Yanıtı kaydet
         const savedResponse = await RoadmapRepository.createResponse(roadmapResponseData);
         return savedResponse;
       }
     } catch (error) {
+      console.error('Error creating or updating roadmap:', error);
       throw new Error(`Error creating or updating roadmap: ${(error as Error).message}`);
     }
   }

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import RoadmapService from './RoadmapService';
 import { sendResponse, sendErrorResponse } from '../../utils/ControllerUtil';
-import { IRoadmapRequest } from './RoadmapRequestModel';
+import { IRoadmapRequest } from './model/RoadmapRequestModel';
 
 class RoadmapController {
   // Tüm roadmapi getirir

@@ -28,6 +28,7 @@ import { RoadmapLayoutComponent } from './layouts/roadmap/roadmap-layout.compone
 import { JwtInterceptor } from '../shared/services/jwt-interceptor.service';
 import { LoaderComponent } from './components/loader/loader.component';
 import { InterceptorService } from '../shared/services/interceptor.service';
+import { LandingComponent } from './modules/landing-module/landing.component';
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return localStorageSync({
@@ -49,6 +50,7 @@ export const metaReducers: MetaReducer<{ app: AppState }, Action>[] = [localStor
     AuthLayoutComponent,
     UserLayoutComponent,
     AdminLayoutComponent,
+    LandingComponent,
     RoadmapLayoutComponent,
     LoaderComponent,
   ],

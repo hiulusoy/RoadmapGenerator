@@ -42,12 +42,6 @@ const routes: Routes = [
   {
     path: environment.ROUTE_LANDING,
     component: LandingComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./modules/landing-module/landing.module').then((m) => m.LandingModule),
-      },
-    ],
   },
 ];
 

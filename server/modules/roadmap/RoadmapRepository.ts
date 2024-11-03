@@ -1,6 +1,8 @@
+// server/modules/roadmap/RoadmapRepository.ts
+
 import mongoose from 'mongoose';
-import RoadmapRequestModel, { IRoadmapRequest } from './RoadmapRequestModel';
-import RoadmapResponseModel, { IRoadmapResponse, IRoadmapResponseData } from './RoadmapResponseModel';
+import RoadmapRequestModel, { IRoadmapRequest } from './model/RoadmapRequestModel';
+import RoadmapResponseModel, { IRoadmapResponse, IRoadmapResponseData } from './model/RoadmapResponseModel';
 
 class RoadmapRepository {
   // Tüm roadmapi getirir
@@ -46,7 +48,7 @@ class RoadmapRepository {
       return await RoadmapRequestModel.findOne({
         topic: roadmapData.topic,
         level: roadmapData.level,
-        learning_style: roadmapData.learning_style
+        learning_style: roadmapData.learning_style,
       });
     } catch (error) {
       throw error;
@@ -73,4 +75,5 @@ class RoadmapRepository {
   }
 }
 
+// RoadmapRepository'nin tekil bir instance'ını export edin
 export default new RoadmapRepository();

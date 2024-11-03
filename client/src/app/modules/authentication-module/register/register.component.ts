@@ -36,15 +36,13 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     if (this.registerForm.invalid) {
-      console.log('invalid registration form');
       // Form geçersizse işlemi durdur
       return;
     }
 
     const registerRequest: RegisterRequest = this.registerForm.value;
 
-    console.log(registerRequest, 'register');
-
+   
     this.loadingService.show();
 
     this.authService.register(registerRequest).subscribe({

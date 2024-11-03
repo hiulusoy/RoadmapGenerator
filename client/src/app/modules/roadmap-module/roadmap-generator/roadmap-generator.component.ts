@@ -31,7 +31,6 @@ export class RoadmapGeneratorComponent implements OnInit {
     const control = this.learningPlanForm.get(controlName);
 
     if (control && control.valid) {
-      console.log(`${controlName} value:`, control.value);
       this.currentStep++;
     } else {
       console.warn(`${controlName} is invalid or empty`);
@@ -40,14 +39,12 @@ export class RoadmapGeneratorComponent implements OnInit {
 
   submitForm() {
     if (this.learningPlanForm.valid) {
-      console.log('Form Data:', this.learningPlanForm.value);
 
       // Move to Step 4 (Loading)
       this.currentStep = 4;
 
       this.roadmapService.createRoadmap(this.learningPlanForm.value).subscribe(
         (response) => {
-          console.log('Roadmap creation response:', response);
 
           // Navigate to `inspectRoadmap` with the newly created roadmap ID
           this.router.navigate([`${environment.ROUTE_ROADMAP}/inspect`, response.id]);
