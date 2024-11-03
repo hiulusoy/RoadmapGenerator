@@ -16,6 +16,10 @@ export class RoadmapService extends BaseService {
     return this.get<Roadmap[]>('/roadmap');
   }
 
+  getRoadmapById(id: any): Observable<Roadmap[]> {
+    return this.get<Roadmap[]>(`/roadmap/${id}`);
+  }
+
   createRoadmap(roadmapData: any): Observable<any> {
     return this.post<any, any>('/roadmap', roadmapData);
   }

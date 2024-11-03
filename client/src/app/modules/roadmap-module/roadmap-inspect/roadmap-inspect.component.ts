@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoadmapService } from '../service/roadmap.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environement';
 
 @Component({
@@ -15,12 +15,18 @@ export class RoadmapInspectComponent implements OnInit {
   formSubmitted: boolean = false;
   loading: boolean = false;
   messageDisplayed: boolean = false;
+  currentRoadmapId: any;
 
-  constructor(private fb: FormBuilder, private roadmapService: RoadmapService, private router: Router) {
+  constructor(private fb: FormBuilder, private roadmapService: RoadmapService, private router: Router, private route: ActivatedRoute) {
     this.learningPlanForm = this.fb.group({
       topic: ['', Validators.required],
       level: ['', Validators.required],
       learning_style: ['', Validators.required],
+    });
+
+    this.route.params.subscribe((params) => {
+      if (!params['id']) return;
+      this.currentRoadmapId = params['id'];
     });
   }
 

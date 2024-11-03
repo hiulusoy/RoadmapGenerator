@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { RoadmapGeneratorComponent } from './roadmap-generator/roadmap-generator.component';
 import { RoadmapListComponent } from './roadmap-list/roadmap-list.component';
+import { RoadmapInspectComponent } from './roadmap-inspect/roadmap-inspect.component';
 
 export const RoadmapGeneratorRoutes: Routes = [
   {
@@ -12,7 +13,11 @@ export const RoadmapGeneratorRoutes: Routes = [
       },
       {
         path: 'list',
-        component: RoadmapListComponent, // route
+        component: RoadmapListComponent,
+      },
+      {
+        path: 'inspect/:id',
+        component: RoadmapInspectComponent, 
       },
     ],
   },

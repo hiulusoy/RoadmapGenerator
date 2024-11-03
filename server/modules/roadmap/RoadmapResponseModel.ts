@@ -1,61 +1,72 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 
-// Öğrenme aktivitesi arayüzü
-export interface ILearningActivity {
-  type: string;
-  title: string;
+// Interface for individual learning resources within each activity
+export interface ILearningResource {
   description: string;
+  learningType: string[];
   link: string;
-  learningType: string;
 }
 
-// Hafta planı arayüzü
-export interface IWeekPlan {
-  week: number;
-  title: string;
-  activities: ILearningActivity[];
+// Interface for activities within each week
+export interface IActivity {
+  activity: string;
+  description: string;
+  learningType: string[];
+  resources: ILearningResource[];
 }
 
-// Veritabanından alınan dökümanlar için Response arayüzü (Document genişletilmiş)
+// Interface for each week within the roadmap
+export interface IWeekSchedule {
+  week: string;
+  details: IActivity;
+}
+
+// Roadmap response interface extending Document (for database documents)
 export interface IRoadmapResponse extends Document {
   _id: mongoose.Types.ObjectId;
-  weeks: IWeekPlan[];
+  weeklySchedule: { weeks: Record<string, IWeekSchedule> };
   createdByName: string;
   isPublic: boolean;
   requestId: mongoose.Types.ObjectId;
-  createdByIds: mongoose.Types.ObjectId[]; // Eklendi
+  createdByIds: mongoose.Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
 }
 
-// Yeni döküman oluşturmak için kullanılacak arayüz (Document genişletilmemiş)
+// Interface for creating new roadmap data (without Document extension)
 export interface IRoadmapResponseData {
-  weeks: IWeekPlan[];
-  createdByIds: mongoose.Types.ObjectId[]; // Eklendi
+  weeklySchedule: { weeks: Record<string, IWeekSchedule> };
+  createdByIds: mongoose.Types.ObjectId[];
   createdByName?: string;
   isPublic: boolean;
   requestId: mongoose.Types.ObjectId;
 }
 
-// Response şeması tanımı
+// Roadmap schema definition
 const RoadmapResponseSchema: Schema = new Schema(
   {
-    weeks: [
-      {
-        week: { type: Number, required: true },
-        title: { type: String, required: true },
-        activities: [
-          {
-            type: { type: String, required: true },
-            title: { type: String, required: true },
+    weeklySchedule: {
+      weeks: {
+        type: Map,
+        of: new Schema({
+          week: { type: String, required: true },
+          details: {
+            activity: { type: String, required: true },
             description: { type: String, required: true },
-            link: { type: String, required: true },
-            learningType: { type: String, required: true },
+            learningType: [{ type: String, required: true }],
+            resources: [
+              {
+                description: { type: String, required: true },
+                learningType: [{ type: String, required: true }],
+                link: { type: String, required: true },
+              },
+            ],
           },
-        ],
+        }),
+        required: true,
       },
-    ],
-    createdByIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }], // Eklendi
+    },
+    createdByIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }],
     createdByName: { type: String, required: true },
     isPublic: { type: Boolean, default: false },
     requestId: { type: mongoose.Schema.Types.ObjectId, ref: 'RoadmapRequest', required: true },
@@ -65,6 +76,7 @@ const RoadmapResponseSchema: Schema = new Schema(
   }
 );
 
+// Model definition
 const RoadmapResponseModel: Model<IRoadmapResponse> = mongoose.model<IRoadmapResponse>(
   'RoadmapResponse',
   RoadmapResponseSchema
