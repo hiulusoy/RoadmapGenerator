@@ -31,6 +31,9 @@ export interface IRoadmapResponse extends Document {
   createdByIds: mongoose.Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
+
+  // Method to return weeks in a consistent structure
+  getWeeks(): Record<string, IWeekSchedule>;
 }
 
 // Interface for creating new roadmap data (without Document extension)
@@ -75,6 +78,11 @@ const RoadmapResponseSchema: Schema = new Schema(
     timestamps: true,
   }
 );
+
+// Custom method to get weeks in the desired format
+RoadmapResponseSchema.methods.getWeeks = function (): Record<string, IWeekSchedule> {
+  return this.weeklySchedule.weeks.toJSON();
+};
 
 // Model definition
 const RoadmapResponseModel: Model<IRoadmapResponse> = mongoose.model<IRoadmapResponse>(

@@ -12,12 +12,12 @@ export class RoadmapService extends BaseService {
     super(http);
   }
 
-  getRoadmaps(): Observable<Roadmap[]> {
-    return this.get<Roadmap[]>('/roadmap');
+  getRoadmaps(): Observable<any> {
+    return this.get<any>('/roadmap');
   }
 
-  getRoadmapById(id: any): Observable<Roadmap[]> {
-    return this.get<Roadmap[]>(`/roadmap/${id}`);
+  getRoadmapById(id: any): Observable<any> {
+    return this.get<any>(`/roadmap/${id}`);
   }
 
   createRoadmap(roadmapData: any): Observable<any> {

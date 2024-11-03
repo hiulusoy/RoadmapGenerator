@@ -36,7 +36,6 @@
                   <span class="hidden md:inline">New Roadmap</span>
                 </button>
               </a>
-              
             </div>
 
             <!--  End: Roadmap Action -->
@@ -48,7 +47,7 @@
               <thead>
                 <tr>
                   <th>
-                    <input id="roadmap_check_all" aria-label="Check all" type="checkbox" data-slot="all-checkbox" class="checkbox checkbox-xs" />
+                    <input id="roadmap_check_all" aria-label="Check all" type="checkbox" class="checkbox checkbox-xs" />
                   </th>
                   <th>
                     <span class="text-sm font-medium text-base-content/80">Topic</span>
@@ -70,26 +69,21 @@
               <tbody>
                 <tr *ngFor="let roadmap of roadmaps" class="cursor-pointer hover:bg-base-200/40">
                   <th>
-                    <input aria-label="Single check" type="checkbox" data-slot="single-checkbox" class="checkbox checkbox-xs" />
+                    <input aria-label="Single check" type="checkbox" class="checkbox checkbox-xs" />
                   </th>
                   <td>
-                    <div class="font-medium">{{ roadmap.topic }}</div>
+                    <div class="font-medium">{{ roadmap.topic || 'Not Available' }}</div>
                   </td>
                   <td>
-                    <div class="font-medium">{{ roadmap.level }}</div>
+                    <div class="font-medium">{{ roadmap.level || 'Not Available' }}</div>
                   </td>
                   <td>
-                    <div class="font-medium">{{ roadmap.learning_style }}</div>
+                    <div class="font-medium">{{ roadmap.learning_style || 'Not Available' }}</div>
                   </td>
                   <td>
                     <div>
-                      <span
-                        [ngClass]="{
-                          'text-success': roadmap.isPublic,
-                          'text-error': !roadmap.isPublic
-                        }"
-                      >
-                        {{ roadmap.isPublic ? 'Evet' : 'Hayır' }}
+                      <span [ngClass]="{ 'text-success': roadmap.isPublic, 'text-error': !roadmap.isPublic }">
+                        {{ roadmap.isPublic ? 'Yes' : 'No' }}
                       </span>
                     </div>
                   </td>

@@ -1,13 +1,36 @@
 import mongoose from 'mongoose';
 import RoadmapRepository from './RoadmapRepository';
-import { IRoadmapRequest } from './RoadmapRequestModel';
+import RoadmapRequestModel, { IRoadmapRequest } from './RoadmapRequestModel';
 import axios from 'axios';
-import { IRoadmapResponse, IRoadmapResponseData } from './RoadmapResponseModel';
+import RoadmapResponseModel, { IRoadmapResponse, IRoadmapResponseData } from './RoadmapResponseModel';
 
 class RoadmapService {
-  async getAll(userId: string): Promise<IRoadmapResponse[]> {
+  async getAll(userId: string): Promise<any[]> {
     try {
-      return await RoadmapRepository.getAll(userId);
+      const roadmaps = await RoadmapResponseModel.find({ createdByIds: userId });
+
+      const roadmapData = await Promise.all(
+        roadmaps.map(async (roadmap) => {
+          // Fetch associated request data
+          const request = await RoadmapRequestModel.findById(roadmap.requestId);
+
+          return {
+            _id: roadmap._id,
+            isPublic: roadmap.isPublic,
+            createdByIds: roadmap.createdByIds,
+            requestId: roadmap.requestId,
+            weeklySchedule: {
+              weeks: roadmap.weeklySchedule.weeks,
+            },
+            // Include additional request fields if found
+            topic: request?.topic || 'Not Available',
+            level: request?.level || 'Not Available',
+            learning_style: request?.learning_style || 'Not Available',
+          };
+        })
+      );
+
+      return roadmapData;
     } catch (error) {
       throw new Error(`Error getting roadmaps: ${(error as Error).message}`);
     }
@@ -86,7 +109,7 @@ class RoadmapService {
           weeklySchedule: responseData.weeklySchedule, // Use response data directly
           isPublic: roadmapData.isShared,
           requestId: savedRequest._id,
-          createdByIds: [userId]
+          createdByIds: [userId],
         };
 
         const savedResponse = await RoadmapRepository.createResponse(roadmapResponseData);

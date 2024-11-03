@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Roadmap } from '../model/model';
 import { RoadmapService } from '../service/roadmap.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-roadmap-list',
@@ -8,9 +9,9 @@ import { RoadmapService } from '../service/roadmap.service';
   styleUrl: './roadmap-list.component.css',
 })
 export class RoadmapListComponent {
-  roadmaps: Roadmap[] = [];
+  roadmaps: any[] = [];
 
-  constructor(private roadmapService: RoadmapService) {}
+  constructor(private roadmapService: RoadmapService, private router: Router) {}
 
   ngOnInit(): void {
     this.getRoadmaps();
@@ -18,17 +19,35 @@ export class RoadmapListComponent {
 
   getRoadmaps(): void {
     this.roadmapService.getRoadmaps().subscribe(
-      (data: Roadmap[]) => {
-        this.roadmaps = data;
+      (response) => {
+        // Check if the response has data
+        if (response && Array.isArray(response)) {
+          this.roadmaps = response.map((roadmap) => {
+            const firstWeek = Object.values(roadmap.weeklySchedule.weeks)[0] || {};
+            return {
+              _id: roadmap._id,
+              isPublic: roadmap.isPublic,
+              createdByIds: roadmap.createdByIds,
+              requestId: roadmap.requestId,
+              topic: roadmap.topic,
+              level: roadmap.level,
+              learning_style: roadmap.learning_style,
+            };
+          });
+          console.log('Normalized Roadmap list:', this.roadmaps);
+        } else {
+          console.log('No data found in the response');
+        }
       },
       (error) => {
-        console.error('Roadmap verileri alınırken hata oluştu', error);
+        console.error('Error fetching roadmaps:', error);
       }
     );
   }
 
-  editRoadmap(roadmap: Roadmap): void {
-    // Düzenleme fonksiyonunu burada uygulayın
+  editRoadmap(roadmap: any): void {
+    // Navigate to the inspect page with the roadmap ID
+    this.router.navigate([`/roadmap/inspect`, roadmap._id]);
   }
 
   viewRoadmap(roadmap: Roadmap): void {
