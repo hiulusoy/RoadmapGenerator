@@ -1,8 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environement';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from '../../../../shared/services/loading.service';
-import { AuthService } from '../services/auth.service';
+import { AuthFacade } from '../+state/auth.facade';
+
+import { LoginRequest } from '../model/request/request';
 
 @Component({
   selector: 'app-login',
@@ -10,57 +12,37 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  // @ViewChild('bannerVideo') videoPlayer?: ElementRef;
-
-  // playVideo() {
-  //   const video: HTMLVideoElement = this.videoPlayer?.nativeElement;
-  //   video.play();
-  
-  // }
-
-  // pauseVideo() {
-  //   const video: HTMLVideoElement = this.videoPlayer?.nativeElement;
-  //   video.pause();
-  // }
-
-
-  registerRoute: string = `/${environment.ROUTE_PARENT_AUTHENTICATION}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_REGISTER}`;
-  forgotPasswordRoute: string = `/${environment.ROUTE_PARENT_AUTHENTICATION}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_FORGOT_PASSWORD}`;
+  registerRoute: string = `/${environment.ROUTE_PAGES}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_REGISTER}`;
+  forgotPasswordRoute: string = `/${environment.ROUTE_PAGES}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_FORGOT_PASSWORD}`;
   hide = true;
   loginForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, private loadingService: LoadingService, private authService: AuthService) {}
+  constructor(public formBuilder: FormBuilder, private loadingService: LoadingService, private authFacade: AuthFacade) {}
 
   ngOnInit(): void {
-    // this.playVideo();
     this.loginForm = this.formBuilder.group({
-      email: [''],
-      password: [''],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
   }
 
-  login() {
-    this.loadingService.show();
+  login(): void {
     if (this.loginForm.valid) {
-      const email = this.loginForm.get('email').value;
-      const password = this.loginForm.get('password').value;
       this.loadingService.show();
-      if (email && password) {
-        this.authService.signIn(email, password, '').subscribe((res) => {
-          console.log(res);
-        });
-        // this.recaptchaV3Service.execute('login').subscribe(token => {
-        //   this.authService.signIn(email, password, token);
-        // });
-      }
-    } else {
+
+      const loginRequest: LoginRequest = {
+        email: this.loginForm.get('email')?.value,
+        password: this.loginForm.get('password')?.value,
+      };
+
+      this.authFacade.login(loginRequest);
       this.loadingService.hide();
     }
   }
-  toggleHide() {
+
+  toggleHide(): void {
     this.hide = !this.hide;
   }
-  ngOnDestroy(): void {
-    // this.pauseVideo();
-  }
+
+  ngOnDestroy(): void {}
 }

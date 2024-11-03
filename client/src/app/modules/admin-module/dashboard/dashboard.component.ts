@@ -1,20 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexDataLabels,
-  ApexFill,
-  ApexGrid,
-  ApexLegend,
-  ApexPlotOptions,
-  ApexResponsive,
-  ApexStroke,
-  ApexTooltip,
-  ApexXAxis,
-  ApexYAxis,
-} from 'ng-apexcharts';
+import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexGrid, ApexLegend, ApexPlotOptions, ApexResponsive, ApexStroke, ApexTooltip, ApexXAxis, ApexYAxis } from 'ng-apexcharts';
 import { Subscription } from 'rxjs';
-import { ThemeService } from "../../theme.service";
+import { ThemeService } from '../../../components/theme.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -45,8 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private themeSubscription: Subscription;
 
-  constructor(private themeService: ThemeService) {
-  }
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
     this.initRevenueStatisticsChart();
@@ -97,18 +83,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         enabled: false,
       },
       xaxis: {
-        categories: [
-          '2016',
-          '2017',
-          '2018',
-          '2019',
-          '2020',
-          '2021',
-          '2022',
-          '2023',
-          '2024',
-          '2025',
-        ],
+        categories: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
       },
       colors: ['#3e60d5', '#3ed5b9'],
       legend: {

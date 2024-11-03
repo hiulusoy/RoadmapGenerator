@@ -1,56 +1,67 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { environment } from '../../../../environments/environement';
+// src/app/components/register/register.component.ts
+
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from '../../../../shared/services/loading.service';
+import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environement';
 import { AuthService } from '../services/auth.service';
+import { RegisterRequest } from '../model/request/request';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit, OnDestroy {
-
-
-  loginRoute: string = `/${environment.ROUTE_PARENT_AUTHENTICATION}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_LOGIN}`;
+export class RegisterComponent implements OnInit {
+  loginRoute: string = `${environment.ROUTE_PAGES}/${environment.ROUTE_AUTHENTICATION}/${environment.ROUTE_LOGIN}`;
   registerForm: FormGroup;
   hide = true;
-  constructor(public formBuilder: FormBuilder, private loadingService: LoadingService, private authService: AuthService) {
 
-  }
+  constructor(private formBuilder: FormBuilder, private loadingService: LoadingService, private authService: AuthService, private router: Router) {}
+
   ngOnInit(): void {
+    this.createRegisterForm();
+  }
+
+  private createRegisterForm(): void {
     this.registerForm = this.formBuilder.group({
-      firstName:["",Validators.required],
-      lastName:["",Validators.required],
-      email: ["",Validators.required],
-      password: ["",Validators.required],
-      termsAndCondition:[false, [Validators.requiredTrue]]
+      firstName: ['', [Validators.required, Validators.maxLength(50)]],
+      lastName: ['', [Validators.required, Validators.maxLength(50)]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
+      termsAndCondition: [false, [Validators.requiredTrue]],
     });
   }
-  register() {
-    this.loadingService.show();
-    if (this.registerForm.valid) {
-      const firstName = this.registerForm.get('firstName').value;
-      const lastName = this.registerForm.get('lastName').value;
-      const email = this.registerForm.get('email').value;
-      const password = this.registerForm.get('password').value;
-      this.loadingService.show();
-      if (firstName && lastName && email && password) {
-        this.authService.register(firstName, lastName, email, password).subscribe((res)=>{
-          console.log(res);          
-        });
-        // this.recaptchaV3Service.execute('login').subscribe(token => {
-        //   this.authService.signIn(email, password, token);
-        // });
-      }
 
-    } else {
-      this.loadingService.hide();
+  register(): void {
+    if (this.registerForm.invalid) {
+      console.log('invalid registration form');
+      // Form geçersizse işlemi durdur
+      return;
     }
+
+    const registerRequest: RegisterRequest = this.registerForm.value;
+
+    console.log(registerRequest, 'register');
+
+    this.loadingService.show();
+
+    this.authService.register(registerRequest).subscribe({
+      next: () => {
+        this.loadingService.hide();
+        // Başarılı kayıt sonrası login sayfasına yönlendir
+        this.router.navigate([this.loginRoute]);
+      },
+      error: (error) => {
+        console.error('Register error:', error);
+        this.loadingService.hide();
+        // Hata mesajını kullanıcıya göster
+      },
+    });
   }
-  toggleHide() {
+
+  toggleHide(): void {
     this.hide = !this.hide;
-  }
-  ngOnDestroy(): void {
   }
 }

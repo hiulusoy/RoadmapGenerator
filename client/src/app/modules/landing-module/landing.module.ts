@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LandingComponent } from './landing.component';
 import { RouterModule } from '@angular/router';
 import { LandingRoutes } from './landing.routing';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -11,7 +12,7 @@ import { LandingRoutes } from './landing.routing';
     LandingComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     RouterModule.forChild(LandingRoutes),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

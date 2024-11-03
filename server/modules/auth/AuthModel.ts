@@ -1,10 +1,11 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
+import { IUser } from '../users/UserModel';
 
 // Auth arayüzü tanımı (TypeScript için)
 export interface IAuth extends Document {
   email: string;
   password?: string;
-  user: mongoose.Types.ObjectId;
+  user: mongoose.Types.ObjectId | IUser; // Hem ObjectId hem IUser tiplerini destekleyecek şekilde ayarladık
 }
 
 // Auth şeması tanımı
@@ -14,7 +15,7 @@ const AuthSchema: Schema = new Schema(
     password: { type: String, required: true, select: false },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'User', // `User` referansının doğru olduğundan emin olun
       required: true,
     },
   },

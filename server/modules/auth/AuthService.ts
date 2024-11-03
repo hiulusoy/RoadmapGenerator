@@ -27,7 +27,10 @@ class AuthService {
 
   // Kullanıcı giriş işlemi
   async login(email: string, password: string): Promise<{ auth: IAuth; token: string }> {
-    const auth = await AuthModel.findOne({ email }).select('+password').populate('user').exec();
+    const auth = await AuthModel.findOne({ email })
+      .select('+password')
+      .populate('user') // Kullanıcı bilgilerini doldurmak için `populate` kullanıyoruz
+      .exec();
 
     if (!auth || !auth.password) {
       throw new Error('Kullanıcı bulunamadı veya şifre eksik');
@@ -41,7 +44,7 @@ class AuthService {
     // Şifre alanını kaldırıyoruz
     auth.password = undefined;
 
-    const token = generateToken(auth.user._id.toString());
+    const token = generateToken(auth.user.id.toString());
     return { auth, token };
   }
 }

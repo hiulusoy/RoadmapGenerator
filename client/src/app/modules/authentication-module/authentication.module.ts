@@ -7,12 +7,11 @@ import { RegisterComponent } from './register/register.component';
 import 'iconify-icon';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild(AuthenticationRoutes),
   ],
   declarations: [

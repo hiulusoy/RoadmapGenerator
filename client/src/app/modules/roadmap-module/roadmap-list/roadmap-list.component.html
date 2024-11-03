@@ -1,0 +1,166 @@
+<div class="content-wrapper">
+  <div>
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-medium">Roadmaps</h3>
+      <div aria-label="Breadcrumbs" class="breadcrumbs hidden p-0 text-sm sm:inline">
+        <ul>
+          <li>Nexus</li>
+          <li>Ecommerce</li>
+          <li>Roadmaps</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-5">
+      <div aria-label="Card" class="card card-bordered mt-5 bg-base-100">
+        <div class="card-body p-0">
+          <div class="flex items-center justify-between px-5 pt-5">
+            <!--  Start: Roadmap Table Filter Input -->
+
+            <div class="inline-flex items-center gap-3">
+              <div></div>
+              <div class="hidden sm:block">
+                <div>
+                  <div class="form-control w-48"></div>
+                </div>
+              </div>
+            </div>
+
+            <!--  End: Roadmap Table Filter Input -->
+
+            <!--  Start: Roadmap Action -->
+
+            <div class="inline-flex items-center gap-3">
+              <a aria-label="Create roadmap link" [routerLink]="['/roadmap/generate']">
+                <button class="btn btn-primary btn-sm inline-flex">
+                  <iconify-icon icon="lucide:plus" height="16"></iconify-icon>
+                  <span class="hidden md:inline">New Roadmap</span>
+                </button>
+              </a>
+              
+            </div>
+
+            <!--  End: Roadmap Action -->
+          </div>
+          <div class="overflow-auto">
+            <!--  Start: Roadmap Table -->
+
+            <table class="table mt-2 rounded-box" id="roadmap_table" data-component="table">
+              <thead>
+                <tr>
+                  <th>
+                    <input id="roadmap_check_all" aria-label="Check all" type="checkbox" data-slot="all-checkbox" class="checkbox checkbox-xs" />
+                  </th>
+                  <th>
+                    <span class="text-sm font-medium text-base-content/80">Topic</span>
+                  </th>
+                  <th>
+                    <span class="text-sm font-medium text-base-content/80">Level</span>
+                  </th>
+                  <th>
+                    <span class="text-sm font-medium text-base-content/80">Learning Style</span>
+                  </th>
+                  <th>
+                    <span class="text-sm font-medium text-base-content/80">Public</span>
+                  </th>
+                  <th>
+                    <span class="text-sm font-medium text-base-content/80">Actions</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let roadmap of roadmaps" class="cursor-pointer hover:bg-base-200/40">
+                  <th>
+                    <input aria-label="Single check" type="checkbox" data-slot="single-checkbox" class="checkbox checkbox-xs" />
+                  </th>
+                  <td>
+                    <div class="font-medium">{{ roadmap.topic }}</div>
+                  </td>
+                  <td>
+                    <div class="font-medium">{{ roadmap.level }}</div>
+                  </td>
+                  <td>
+                    <div class="font-medium">{{ roadmap.learning_style }}</div>
+                  </td>
+                  <td>
+                    <div>
+                      <span
+                        [ngClass]="{
+                          'text-success': roadmap.isPublic,
+                          'text-error': !roadmap.isPublic
+                        }"
+                      >
+                        {{ roadmap.isPublic ? 'Evet' : 'Hayır' }}
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="inline-flex w-fit">
+                      <button aria-label="Edit roadmap" class="btn btn-square btn-ghost btn-sm" (click)="editRoadmap(roadmap)">
+                        <iconify-icon icon="lucide:pencil" height="15" class="text-base-content/70"></iconify-icon>
+                      </button>
+                      <button aria-label="View roadmap" class="btn btn-square btn-ghost btn-sm" (click)="viewRoadmap(roadmap)">
+                        <iconify-icon icon="lucide:eye" height="16" class="text-base-content/70"></iconify-icon>
+                      </button>
+                      <button aria-label="Delete roadmap" class="btn btn-square btn-ghost btn-sm text-error/70 hover:bg-error/20" (click)="confirmDelete(roadmap)">
+                        <iconify-icon icon="lucide:trash" height="16"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!--  End: Roadmap Table -->
+          </div>
+          <div class="flex items-center justify-end px-5 pb-5 pt-3">
+            <!--  Start: Roadmap Table Pagination -->
+
+            <div class="join">
+              <button aria-label="pagination-prev" class="btn join-item btn-sm gap-2">
+                <iconify-icon icon="lucide:chevron-left" height="16"></iconify-icon>
+              </button>
+              <button aria-label="pagination-1" class="btn btn-primary join-item btn-active btn-sm">1</button>
+              <button aria-label="pagination-2" class="btn join-item btn-sm">2</button>
+              <button aria-label="pagination-next" class="btn join-item btn-sm gap-2">
+                <iconify-icon icon="lucide:chevron-right" height="16"></iconify-icon>
+              </button>
+            </div>
+
+            <!--  End: Roadmap Table Pagination -->
+          </div>
+        </div>
+      </div>
+
+      <!--  Start: Roadmap Delete Confirmation Modal -->
+
+      <dialog aria-label="Modal" class="modal" id="delete_modal">
+        <div class="modal-box">
+          <form method="dialog">
+            <button aria-label="Close modal" class="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">
+              <iconify-icon icon="lucide:x" height="14"></iconify-icon>
+            </button>
+          </form>
+          <div class="mb-8 w-full text-xl font-bold">Confirm Delete</div>
+          <div>
+            You are about to delete
+            <b>Roadmap</b>
+            . Would you like to proceed further ?
+          </div>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn btn-error btn-sm">No</button>
+            </form>
+            <form method="dialog">
+              <button class="btn btn-primary btn-sm">Yes</button>
+            </form>
+          </div>
+        </div>
+        <form class="modal-backdrop" method="dialog">
+          <button>close</button>
+        </form>
+      </dialog>
+
+      <!--  End: Roadmap Delete Confirmation Modal -->
+    </div>
+  </div>
+</div>
