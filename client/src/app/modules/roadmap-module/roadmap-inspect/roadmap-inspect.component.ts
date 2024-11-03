@@ -10,19 +10,41 @@ import { environment } from '../../../../environments/environement';
   styleUrls: ['./roadmap-inspect.component.css'],
 })
 export class RoadmapInspectComponent implements OnInit {
-  learningPlanForm: FormGroup;
-  currentStep: number = 1;
-  formSubmitted: boolean = false;
-  loading: boolean = false;
-  messageDisplayed: boolean = false;
-  currentRoadmapId: any;
+  roadmap: any = {}; // Initialize roadmap to an empty object
+  selectedWeek: any = null; // Initialize selected week to null
 
-  constructor(private fb: FormBuilder, private roadmapService: RoadmapService, private router: Router, private route: ActivatedRoute) {
-    this.route.params.subscribe((params) => {
-      if (!params['id']) return;
-      this.currentRoadmapId = params['id'];
-    });
+  constructor(private roadmapService: RoadmapService, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    const roadmapId = this.route.snapshot.paramMap.get('id');
+    if (roadmapId) {
+      this.fetchRoadmapById(roadmapId);
+    }
   }
 
-  ngOnInit() {}
+  fetchRoadmapById(id: string): void {
+    this.roadmapService.getById(id).subscribe(
+      (response) => {
+        if (response && response.weeklySchedule) {
+          this.roadmap = response; // Set roadmap to the fetched data
+          this.selectedWeek = null; // Reset selected week
+        } else {
+          console.error('No valid roadmap data found in response.');
+        }
+      },
+      (error) => {
+        console.error('Failed to fetch roadmap data:', error);
+      }
+    );
+  }
+
+  selectWeek(weekKey: string): void {
+    if (this.roadmap && this.roadmap.weeklySchedule && this.roadmap.weeklySchedule[weekKey]) {
+      this.selectedWeek = this.roadmap.weeklySchedule[weekKey];
+    }
+  }
+
+  getWeekKeys(): string[] {
+    return this.roadmap && this.roadmap.weeklySchedule ? Object.keys(this.roadmap.weeklySchedule) : [];
+  }
 }

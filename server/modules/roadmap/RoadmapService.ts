@@ -36,11 +36,24 @@ class RoadmapService {
     }
   }
 
-  async getById(id: string): Promise<IRoadmapResponse | null> {
+  // RoadmapService.ts
+  async getById(id: string): Promise<any> {
     try {
-      return await RoadmapRepository.getById(id);
+      const roadmap = await RoadmapResponseModel.findById(id).populate<{ requestId: IRoadmapRequest }>('requestId');
+
+      if (!roadmap) return null;
+
+      return {
+        _id: roadmap._id,
+        isPublic: roadmap.isPublic,
+        createdByName: roadmap.createdByName,
+        weeklySchedule: roadmap.weeklySchedule.weeks,
+        topic: roadmap.requestId?.topic || 'N/A',
+        level: roadmap.requestId?.level || 'N/A',
+        learning_style: roadmap.requestId?.learning_style || 'N/A',
+      };
     } catch (error) {
-      throw new Error(`Error getting roadmap: ${(error as Error).message}`);
+      throw new Error(`Error getting roadmap by ID: ${(error as Error).message}`);
     }
   }
 

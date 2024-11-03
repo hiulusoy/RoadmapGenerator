@@ -8,6 +8,7 @@ import { BaseService } from '../../../../shared/services/base.service';
   providedIn: 'root',
 })
 export class RoadmapService extends BaseService {
+ 
   constructor(private http: HttpClient) {
     super(http);
   }
@@ -16,7 +17,7 @@ export class RoadmapService extends BaseService {
     return this.get<any>('/roadmap');
   }
 
-  getRoadmapById(id: any): Observable<any> {
+  getById(id: any): Observable<any> {
     return this.get<any>(`/roadmap/${id}`);
   }
 

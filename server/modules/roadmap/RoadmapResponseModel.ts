@@ -72,7 +72,7 @@ const RoadmapResponseSchema: Schema = new Schema(
     createdByIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }],
     createdByName: { type: String, required: true },
     isPublic: { type: Boolean, default: false },
-    requestId: { type: mongoose.Schema.Types.ObjectId, ref: 'RoadmapRequest', required: true },
+    requestId: { type: mongoose.Schema.Types.ObjectId, ref: 'RoadmapRequest', required: true }, // corrected reference
   },
   {
     timestamps: true,
@@ -85,9 +85,6 @@ RoadmapResponseSchema.methods.getWeeks = function (): Record<string, IWeekSchedu
 };
 
 // Model definition
-const RoadmapResponseModel: Model<IRoadmapResponse> = mongoose.model<IRoadmapResponse>(
-  'RoadmapResponse',
-  RoadmapResponseSchema
-);
+const RoadmapResponseModel: Model<IRoadmapResponse> = mongoose.model<IRoadmapResponse>('RoadmapResponse', RoadmapResponseSchema);
 
 export default RoadmapResponseModel;
