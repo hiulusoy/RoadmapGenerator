@@ -1,55 +1,124 @@
 # RoadmapGenerator
 
-![CleanShot 2024-11-03 at 23 08 37](https://github.com/user-attachments/assets/443d39e8-7e99-495b-b65d-611fb0e160f4)
+![RoadmapGenerator Screenshot](https://github.com/user-attachments/assets/443d39e8-7e99-495b-b65d-611fb0e160f4)
 
-
-**Version:** 0.0.1 
+**Version:** 0.0.1
 **Author:** hiulusoy
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Features](#features)
+- [Key Features](#key-features)
+- [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Environment Variables](#environment-variables)
-  - [Backend `.env` File](#backend-env-file)
-  - [ML Agents `.env` File](#ml-agents-env-file)
-- [Running the Application Locally](#running-the-application-locally)
-  - [Backend](#backend)
-  - [Frontend](#frontend)
-- [Docker Setup](#docker-setup)
-  - [Building the Docker Image](#building-the-docker-image)
-  - [Running the Docker Container](#running-the-docker-container)
-  - [Using Docker Compose](#using-docker-compose)
+- [Installation and Setup](#installation-and-setup)
+- [Running the Application](#running-the-application)
+- [Docker Deployment](#docker-deployment)
 - [Project Structure](#project-structure)
 - [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
+- [License](#license)
 - [Contact](#contact)
 
 ## Overview
 
-**RoadmapGenerator** is a comprehensive application designed to help users create, manage, and visualize personalized learning roadmaps. It features an Angular-based frontend for an interactive user interface and a Node.js backend powered by Express and MongoDB for robust data management. Additionally, it integrates with machine learning agents to enhance functionality and provide intelligent insights.
+**RoadmapGenerator** is an innovative application designed to empower users in creating, managing, and visualizing personalized learning roadmaps. With its intuitive Angular-based frontend, robust Node.js backend (powered by Express and MongoDB), and cutting-edge machine learning integration, RoadmapGenerator offers a comprehensive solution for educational planning and progress tracking.
 
-## Features
+## Key Features
 
-- **User Authentication:** Secure user login and registration.
-- **Roadmap Management:** Create, update, delete, and view learning roadmaps.
-- **Collaborative Features:** Multiple users can collaborate on the same roadmap.
-- **Responsive Design:** Optimized for various screen sizes and devices.
-- **Real-time Updates:** Instant updates using WebSockets (if implemented).
-- **Analytics:** Visualize progress and milestones with charts and graphs.
-- **Machine Learning Integration:** Utilize ML agents for advanced features and insights.
+- Intelligent Roadmap Creation
+- User Authentication
+- Collaborative Roadmaps
+- Responsive Design
+- Progress Tracking
+- Resource Integration
+- Customization
+- API Integration
+
+## Technologies Used
+
+- Frontend: Angular 13+, NgRx
+- Backend: Node.js, Express.js, TypeScript
+- Database: MongoDB with Mongoose ODM
+- Authentication: JWT
+- Machine Learning: Python with scikit-learn, TensorFlow
+- API Documentation: Swagger/OpenAPI
+- Testing: Jest, Jasmine, Karma
+- Containerization: Docker and Docker Compose
 
 ## Prerequisites
 
-Before you begin, ensure you have met the following requirements:
+- Node.js (v18+)
+- npm
+- Angular CLI
+- MongoDB (v4.4+)
+- Python (v3.8+)
 
-- **Node.js:** Version 18 or higher. [Download Node.js](https://nodejs.org/)
-- **npm:** Comes bundled with Node.js.
-- **Angular CLI:** Required for running the frontend. Install globally using:
-  
-  ```bash
-  npm install -g @angular/cli
+## Installation and Setup
 
+```bash
+# Clone the repository
+git clone https://github.com/hiulusoy/RoadmapGenerator.git
+cd RoadmapGenerator
+
+# Install backend dependencies
+cd server
+npm install
+
+# Install frontend dependencies
+cd ../client
+npm install
+
+# Set up Python environment for ML agents
+cd ../ml_agents
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+pip install -r requirements.txt
+
+# Create backend .env file
+cd ../server
+echo "PORT=3000
+MONGODB_URI=mongodb://localhost:27017/roadmapgenerator
+JWT_SECRET=your_jwt_secret_key
+NODE_ENV=development" > .env
+
+# Create ML agents .env file
+cd ../ml_agents
+echo "OPENAI_API_KEY=your_openai_api_key
+MODEL_PATH=/path/to/your/ml/model" > .env
+
+# Build Docker image
+docker build -t roadmapgenerator .
+
+# Run Docker container
+docker run -p 4200:4200 -p 3000:3000 roadmapgenerator
+
+# Using Docker Compose
+docker-compose up
+
+
+# Run backend
+cd server
+npm run dev
+
+# Run frontend (in a new terminal)
+cd client
+ng serve
+
+# Run ML agents (in a new terminal)
+cd ml_agents
+python app.py
+
+# Access the application at http://localhost:4200
+
+
+RoadmapGenerator/
+├── client/                 # Angular frontend
+├── server/                 # Node.js backend
+├── ml_agents/              # Python ML scripts
+├── docs/                   # Documentation
+├── tests/                  # Test suites
+├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
+└── README.md
